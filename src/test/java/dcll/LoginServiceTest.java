@@ -32,8 +32,7 @@ public class LoginServiceTest {
 	public void testAddLogin() throws Exception {
 		final String newLogin = "flogar";
 		loginService.addLogin(newLogin);
-		assertEquals("Test addLogin() : NOK", newLogin, loginService.findAllLogins().get(
-				loginService.findAllLogins().size()-1));
+		assertTrue("Test addLogin() : NOK", loginService.loginExists(newLogin));
 		System.out.println("Test addLogin() : OK");
 	}
 
@@ -41,9 +40,8 @@ public class LoginServiceTest {
 	public void testFindAllLoginsStartingWith() throws Exception {
 		final String prefixe = "th";
 		final List<String> result = loginService.findAllLoginsStartingWith(prefixe);
-//		System.out.println(result);
-		final String[] expected = {"thogui", "thoper"};
-		assertArrayEquals("Test findAllLoginsStartingWith() : NOK", expected, result.toArray());
+		final String[] loginsExpected = {"thogui", "thoper"};
+		assertArrayEquals("Test findAllLoginsStartingWith() : NOK", loginsExpected, result.toArray());
 		System.out.println("Test findAllLoginsStartingWith() : OK");
 	}
 
