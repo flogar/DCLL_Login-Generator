@@ -4,18 +4,18 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 /**
- * Classe representant un generateur de login
+ * Classe representant un generateur de login.
  */
 public class LoginGenerator {
 
     private LoginService loginService;
 
     /**
-     * Construit un login generator
-     * @param loginService le service de login
+     * Construit un login generator.
+     * @param pLoginService le service de login
      */
-    public LoginGenerator(LoginService loginService) {
-        this.loginService = loginService;
+    public LoginGenerator(final LoginService pLoginService) {
+        this.loginService = pLoginService;
     }
 
     /**
@@ -33,10 +33,11 @@ public class LoginGenerator {
      * @param prenom le prenom
      * @return le login genere
      */
-    public String generateLoginForNomAndPrenom(String nom, String prenom) {
-        String p = deAccent(prenom.substring(0,1).toUpperCase());
-        String n = deAccent(nom.substring(0,3).toUpperCase());
-        String login = p+n ;
+    public final String generateLoginForNomAndPrenom(
+            final String nom, final String prenom) {
+        String p = deAccent(prenom.substring(0, 1).toUpperCase());
+        String n = deAccent(nom.substring(0, 3).toUpperCase());
+        String login = p + n ;
         if (loginService.loginExists(login)) {
             login = login + "1" ;
         }
@@ -50,7 +51,7 @@ public class LoginGenerator {
      * @param str la chaine de caractere
      * @return la chaine de caractere sans accents
      */
-    private String deAccent(String str) {
+    private String deAccent(final String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
@@ -62,3 +63,4 @@ public class LoginGenerator {
 
 
 }
+

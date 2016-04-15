@@ -17,8 +17,9 @@ public class LoginService {
      * Construit un login service a partir de la liste des logins existants
      * @param loginsExistants
      */
-    public LoginService(String[] loginsExistants) {
-        this.loginsExistants = new ArrayList<String>(Arrays.asList(loginsExistants));
+    public LoginService(final String[] loginsExistants) {
+        this.loginsExistants = new ArrayList<String>(
+                Arrays.asList(loginsExistants));
         Collections.sort(this.loginsExistants);
     }
 
@@ -28,7 +29,7 @@ public class LoginService {
      * @param login le login a verifier
      * @return true si le login existe deja, false sinon
      */
-    public boolean loginExists(String login) {
+    public final boolean loginExists(final String login) {
         return loginsExistants.contains(login);
     }
 
@@ -36,7 +37,7 @@ public class LoginService {
      * Ajoute un login a la liste des logins existants
      * @param login le login a ajouter
      */
-    public void addLogin(String login) {
+    public void addLogin(final String login) {
         loginsExistants.add(login);
     }
 
@@ -46,7 +47,7 @@ public class LoginService {
      * @param pref le prefixe
      * @return la liste des logins prefixes par <em>pref</em>
      */
-    public List<String> findAllLoginsStartingWith(String pref) {
+    public final List<String> findAllLoginsStartingWith(final String pref) {
         ArrayList<String> loginsPrefixes = new ArrayList<String>();
         for (String login: loginsExistants) {
             if (login.startsWith(pref)) {
@@ -61,7 +62,8 @@ public class LoginService {
      *
      * @return la liste de tous les logins
      */
-    public List<String> findAllLogins() {
+    public final List<String> findAllLogins() {
         return  loginsExistants;
     }
 }
+
