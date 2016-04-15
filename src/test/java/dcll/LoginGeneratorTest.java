@@ -54,4 +54,26 @@ public class LoginGeneratorTest {
 				loginService.loginExists(loginExpected));
 		System.out.println("Test generateLoginForNomAndPrenom() - Cas accent : OK");
 	}
+
+	@Test
+	public void testGenerateLoginForNomAndPrenomCasTropCourt() throws Exception {
+		final String prenom = "Paul";
+		final String nom = "Du";
+		final String loginExpected = "PDU";
+		loginGenerator.generateLoginForNomAndPrenom(nom, prenom);
+		assertTrue("Test generateLoginForNomAndPrenom() - Cas trop court : NOK",
+				loginService.loginExists(loginExpected));
+		System.out.println("Test generateLoginForNomAndPrenom() - Cas trop court : OK");
+	}
+
+	@Test
+	public void testGenerateLoginForNomAndPrenomCasTriplet() throws Exception {
+		final String prenom = "John";
+		final String nom = "Ralling";
+		final String loginExpected = "JRAL2";
+		loginGenerator.generateLoginForNomAndPrenom(nom, prenom);
+		assertTrue("Test generateLoginForNomAndPrenom() - Cas triplet : NOK",
+				loginService.loginExists(loginExpected));
+		System.out.println("Test generateLoginForNomAndPrenom() - Cas triplet : OK");
+	}
 }

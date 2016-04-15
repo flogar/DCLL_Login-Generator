@@ -10,6 +10,8 @@ public class LoginGenerator {
 
     private LoginService loginService;
 
+    private final static int TAILLE_MAX_NOM = 3;
+
     /**
      * Construit un login generator.
      * @param pLoginService le service de login
@@ -36,10 +38,14 @@ public class LoginGenerator {
     public final String generateLoginForNomAndPrenom(
             final String nom, final String prenom) {
         String p = deAccent(prenom.substring(0, 1).toUpperCase());
-        String n = deAccent(nom.substring(0, 3).toUpperCase());
+        String n = deAccent(nom.substring(0,
+                (nom.length() >= TAILLE_MAX_NOM ?
+                        TAILLE_MAX_NOM : nom.length())).toUpperCase());
         String login = p + n ;
         if (loginService.loginExists(login)) {
-            login = login + "1" ;
+            int nbOccurence = loginService.
+                    findAllLoginsStartingWith(login).size();
+            login = login + nbOccurence;
         }
         loginService.addLogin(login);
         return login;
